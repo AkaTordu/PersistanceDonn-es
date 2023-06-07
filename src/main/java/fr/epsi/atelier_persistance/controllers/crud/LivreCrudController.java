@@ -18,8 +18,15 @@ public class LivreCrudController {
     }
 
     @GetMapping
-    public List<Livre> getAllLivres() {
-        return livreRepository.findAll();
+    public String getAllLivres(Model model) {
+    List<Livre> livres = livreRepository.findAll();
+    model.addAttribute("livres", livres);
+    return "livres";
+    }
+    
+    @GetMapping("/search")
+    public List<Livre> searchByAuteur(@RequestParam String auteur) {
+        return livreRepository.findByAuteurNom(auteur);
     }
 
     @GetMapping("/{id}")
@@ -50,7 +57,8 @@ public class LivreCrudController {
     public ResponseEntity<?> deleteLivre(@PathVariable Long id) {
         return livreRepository.findById(id)
                 .map(livre -> {
-                    livreRepository.delete(livre);
+                    livre.setDeleted(true);
+                    livreRepository.save(livre);
                     return ResponseEntity.ok().build();
                 }).orElse(ResponseEntity.notFound().build());
     }

@@ -1,6 +1,5 @@
 package fr.epsi.atelier_persistance.entities;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,4 +27,7 @@ public class Livre {
 
     @OneToMany(mappedBy = "livre", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Emprunt> emprunts;
+
+    @Column
+    private boolean deleted = false;
 }

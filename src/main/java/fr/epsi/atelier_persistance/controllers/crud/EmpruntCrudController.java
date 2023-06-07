@@ -5,6 +5,7 @@ import fr.epsi.atelier_persistance.repositories.EmpruntRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -17,43 +18,18 @@ public class EmpruntCrudController {
         this.empruntRepository = empruntRepository;
     }
 
-    @GetMapping
-    public List<Emprunt> getAllEmprunts() {
-        return empruntRepository.findAll();
+    @GetMapping("/count")
+    public long countEmprunts(@RequestParam Date start, @RequestParam Date end) {
+        return empruntRepository.countByDateEmpruntBetween(start, end);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Emprunt> getEmpruntById(@PathVariable Long id) {
-        return empruntRepository.findById(id)
-                .map(emprunt -> ResponseEntity.ok().body(emprunt))
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/encours")
+    public List<Emprunt> getEmpruntsEnCours() {
+        return empruntRepository.findByDateRetourIsNull();
     }
 
-    @PostMapping
-    public Emprunt createEmprunt(@RequestBody Emprunt emprunt) {
-        return empruntRepository.save(emprunt);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Emprunt> updateEmprunt(@PathVariable Long id, @RequestBody Emprunt empruntDetails) {
-        return empruntRepository.findById(id)
-                .map(emprunt -> {
-                    emprunt.setDateEmprunt(empruntDetails.getDateEmprunt());
-                    emprunt.setDateFinPrevue(empruntDetails.getDateFinPrevue());
-                    emprunt.setDateRetour(empruntDetails.getDateRetour());
-                    emprunt.setAdherent(empruntDetails.getAdherent());
-                    emprunt.setLivre(empruntDetails.getLivre());
-                    Emprunt updatedEmprunt = empruntRepository.save(emprunt);
-                    return ResponseEntity.ok().body(updatedEmprunt);
-                }).orElse(ResponseEntity.notFound().build());
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteEmprunt(@PathVariable Long id) {
-        return empruntRepository.findById(id)
-                .map(emprunt -> {
-                    empruntRepository.delete(emprunt);
-                    return ResponseEntity.ok().build();
-                }).orElse(ResponseEntity.notFound().build());
+    @GetMapping("/count/{livreId}")
+    public long countEmpruntsByLivre(@PathVariable Long livreId) {
+        return empruntRepository.countByLivreId(livreId);
     }
 }
