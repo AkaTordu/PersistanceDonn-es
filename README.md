@@ -18,7 +18,7 @@ Ce projet vise à développer une application de gestion de bibliothèque en uti
 ## Technologies Utilisées
 - Java
 - Spring Boot
-- Base de données relationnelle (par ex. MySQL, PostgreSQL)
+- Base de données relationnelle 
 
 ## Installation et Exécution
 1. Cloner le projet depuis ce dépôt.
