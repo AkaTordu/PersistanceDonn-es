@@ -3,6 +3,7 @@ package fr.epsi.atelier_persistance.controllers.crud;
 import fr.epsi.atelier_persistance.entities.Livre;
 import fr.epsi.atelier_persistance.repositories.LivreRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
