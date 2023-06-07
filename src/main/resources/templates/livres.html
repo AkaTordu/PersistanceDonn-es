@@ -1,30 +1,58 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <title>Liste des livres</title>
+    <title>Bibliothèque</title>
 </head>
 <body>
-<h1>Liste des livres</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Titre</th>
-        <th>Auteur</th>
-        <th>Catégorie</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="livre : ${livres}">
-        <td th:text="${livre.titre}"></td>
-        <td th:text="${livre.auteur.nom}"></td>
-        <td th:text="${livre.categorie.nom}"></td>
-        <td>
-            <a th:href="@{/livres/delete/{id}(id=${livre.id})}">Supprimer</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<a href="/livres/add">Ajouter un livre</a>
+    <h1>Liste des livres</h1>
+    <table id="livres-table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Catégorie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="livres-body">
+            <!-- Les livres seront ajoutés ici dynamiquement -->
+        </tbody>
+    </table>
+
+    <h2>Ajouter un livre</h2>
+    <form id="add-livre-form">
+        <label for="titre">Titre:</label>
+        <input type="text" id="titre" name="titre"><br>
+
+        <label for="auteur">Auteur:</label>
+        <input type="text" id="auteur" name="auteur"><br>
+
+        <label for="categorie">Catégorie:</label>
+        <input type="text" id="categorie" name="categorie"><br>
+
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <h2>Supprimer un livre</h2>
+    <form id="delete-livre-form">
+        <label for="livre-id">ID Livre:</label>
+        <input type="text" id="livre-id" name="livre-id"><br>
+
+        <button type="submit">Supprimer</button>
+    </form>
+
+    <h2>Recherche de livres par auteur</h2>
+    <form id="search-livres-form">
+        <label for="auteur">Auteur:</label>
+        <input type="text" id="auteur" name="auteur"><br>
+
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <div id="livres-search-results">
+        <!-- Les résultats de la recherche seront affichés ici dynamiquement -->
+    </div>
+
+    <script src="js/livres.js"></script>
 </body>
 </html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bibliothèque</title>
+</head>
+<body>
+    <h1>Liste des emprunts</h1>
+    <table id="emprunts-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date Emprunt</th>
+                <th>Date Fin Prévue</th>
+                <th>Date Retour</th>
+                <th>Adhérent</th>
+                <th>Livre</th>
+            </tr>
+        </thead>
+        <tbody id="emprunts-body">
+            <!-- Les emprunts seront ajoutés ici dynamiquement -->
+        </tbody>
+    </table>
+
+    <h2>Nombre d'emprunts sur une plage de dates donnée</h2>
+    <form id="count-emprunts-form">
+        <label for="start-date">Date de début:</label>
+        <input type="date" id="start-date" name="start-date"><br>
+
+        <label for="end-date">Date de fin:</label>
+        <input type="date" id="end-date" name="end-date"><br>
+
+        <button type="submit">Rechercher</button>
+    </form>
+    <div id="count-emprunts-results">
+        <!-- Les résultats de la recherche seront affichés ici dynamiquement -->
+    </div>
+
+    <h2>Nombre d'emprunts par livre</h2>
+    <form id="count-emprunts-by-livre-form">
+        <label for="livre-id">ID Livre:</label>
+        <input type="text" id="livre-id" name="livre-id"><br>
+
+        <button type="submit">Rechercher</button>
+    </form>
+    <div id="count-emprunts-by-livre-results">
+        <!-- Les résultats de la recherche seront affichés ici dynamiquement -->
+    </div>
+
+    <h2>Liste des emprunts en cours</h2>
+    <div id="emprunts-en-cours">
+        <!-- Les emprunts en cours seront affichés ici dynamiquement -->
+    </div>
+
+    <script src="js/emprunts.js"></script>
+</body>
+</html>
